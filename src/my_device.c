@@ -99,11 +99,17 @@ int __init my_device_init(void)
 
     printk(KERN_ALERT "[MyDevice] my_device init function is called\n");
 
+    // Register my_deivce (character device)
     result = register_chrdev(MAJOR_NUMBER, device_name, &my_ops);
     if (result < 0) {
         printk(KERN_ALERT "[MyDevice] my_device init failed\n");
         return result;
     }
+
+    // Request GPIO_ADDRESS
+    // (해당 gpio 를 사용하겠다는 의미. -> 나중에 gpio_free(num) 으로 풀어주어야 함)
+    if (gpio_request(LED_ADDRESS, "my_device_led") != 0)
+        printk(KERN_ALERT "[MyDevice] gpio_request LED error\n");
 
     // Set buffer memory
     buffer = (int*) kmalloc(BUFF_SIZE, GFP_KERNEL); // ??
@@ -111,7 +117,6 @@ int __init my_device_init(void)
         memset(buffer, 0, BUFF_SIZE);
 
     printk(KERN_ALERT "[MyDevice] my_device init successful with result : %d", result);
-
     return 0;
 }
 
