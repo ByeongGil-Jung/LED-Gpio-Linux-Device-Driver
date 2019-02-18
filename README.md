@@ -2,7 +2,7 @@
 
 ## 1. Command
 
-### 1. Insert Module & Make Module
+### Insert Module & Make Module
 
 (In /src directory)
 
