@@ -2,9 +2,15 @@
 
 ## 1. Command
 
-### Insert Module & Make Module
-
 (In /src directory)
+
+### 1) Build the kernel source
+
+```
+make
+```
+
+### 2) Insert module & Make module
 
 - Make sure that MAJOR_NUMBER (== 100) does not overlap with any other driver.
 
@@ -14,6 +20,8 @@ mknod /dev/my_device c 100 0
 ```
 
 (In /run directory)
+
+### 3) Build the application source
 
 - Because it is based on the ARM board, it must be built using the ARM compiler.
 
